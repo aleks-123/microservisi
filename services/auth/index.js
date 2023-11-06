@@ -7,7 +7,9 @@ const app = express();
 db.init();
 app.use(express.json());
 
-//ruti
+//routes
+app.post('/api/v1/auth/create-account', auth.signup);
+app.post('/api/v1/auth/login', auth.login);
 
 app.listen(process.env.PORTAUTH, (err) => {
   if (err) {
