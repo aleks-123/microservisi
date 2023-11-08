@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
 
 function Register() {
-  const initData = {
+  const initialData = {
     email: '',
     password: '',
     name: '',
   };
 
-  const [data, setData] = useState(initData);
+  const [data, setData] = useState(initialData);
 
   const dataChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
+  };
+
+  //! Ipsrakjame baranje do nashiot backend server
+  //! i nashiot backend server ni prakja odgovor
+  //! koj moze da bide pozitiven ili negativen
+
+  const register = async () => {
+    try {
+      let res = await fetch('/api/v1/auth/create-account', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (res.ok) {
+        alert('User is created');
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
