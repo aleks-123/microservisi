@@ -1,6 +1,7 @@
 const express = require('express');
 const post = require('./handlers/postHandler');
 const db = require('../../pkg/db/index');
+const fs = require('fs');
 // cors
 const cors = require('cors');
 const jwt = require('express-jwt');
@@ -18,6 +19,9 @@ app.use(
     secret: process.env.JWT_SECRET,
   })
 );
+//routes created and read from the user
+app.post('/api/v1/posts/me', post.createByUser);
+app.get('/api/v1/posts/me', post.getByUser);
 
 //routes
 app.get('/api/v1/posts', post.getAll);
@@ -25,10 +29,6 @@ app.get('/api/v1/posts/:id', post.getOne);
 app.post('/api/v1/posts', post.create);
 app.patch('/api/v1/posts/:id', post.update);
 app.delete('/api/v1/posts/:id', post.delete);
-
-//routes created and read from the user
-app.get('api/v1/posts/me', post.getByUser);
-app.post('api/v1/posts/me', post.createByUser);
 
 app.listen(process.env.PORTPOST, (err) => {
   if (err) {
