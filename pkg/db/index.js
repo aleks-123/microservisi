@@ -11,7 +11,10 @@ const DB = process.env.DATABASE.replace(
 
 exports.init = async () => {
   try {
-    await mongoose.connect(DB);
+    await mongoose.connect(DB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log('Successfully connected to database');
   } catch (err) {
     console.log(err);
