@@ -5,11 +5,14 @@ function ProtectedRoute() {
 
   const fetchPost = async () => {
     try {
-      const res = await fetch('/api/v1/posts', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/posts`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setPosts(data.data.posts);

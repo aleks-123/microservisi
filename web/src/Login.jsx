@@ -25,13 +25,16 @@ function Login() {
   //5. Imame funkcija login koja normalno e asihrona
   const login = async () => {
     try {
-      let res = await fetch('/api/v1/auth/login', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-type': 'application/json',
-        },
-      });
+      let res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/login`,
+        {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      );
       let prevorenJsonVoObjekt = await res.json();
 
       if (res.ok) {
