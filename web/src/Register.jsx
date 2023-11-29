@@ -21,11 +21,12 @@ function Register() {
   //! koj moze da bide pozitiven ili negativen
 
   const register = async () => {
+    console.log(data);
     try {
       let res = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/create-account`,
         {
-          method: 'POST',
+          method: 'post',
           body: JSON.stringify(data),
           headers: {
             'Content-Type': 'application/json',
@@ -33,7 +34,7 @@ function Register() {
         }
       );
       if (res.ok) {
-        alert('User is created');
+        alert('User created!');
       }
     } catch (err) {
       console.log(err);
